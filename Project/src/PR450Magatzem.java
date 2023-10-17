@@ -1,24 +1,24 @@
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PR450Magatzem {
     private List<PR450Producte> productes;
     private int capacitat;
-    private PropertyChangeSupport pcs;
+
 
     public PR450Magatzem() {
         productes = new ArrayList<>();
         capacitat = 10;
-        pcs = new PropertyChangeSupport(this);
+
     }
 
     public void addProducte(PR450Producte producte) {
-        if (productes.size() < capacitat) {
+        if (capacitat > 0) {
+            capacitat--;
             productes.add(producte);
-            System.out.println("S'ha afegit el producte amd id "+producte.getId()+"al magatzem, capacitat"+ capacitat);
-            pcs.firePropertyChange("magatzemAdd", null, producte);
+            System.out.println("S'ha afegit el producte amd id "+producte.getId()+" al magatzem, capacitat "+ capacitat);
+  
         }
     }
 
@@ -26,7 +26,8 @@ public class PR450Magatzem {
         PR450Producte removedProducte = null;
         for (PR450Producte producte : productes) {
             if (producte.getId() == id) {
-                System.out.println("S'ha esborrat el producte amd id "+id+"al magatzem, capacitat"+ capacitat);
+                capacitat++;
+                System.out.println("S'ha esborrat el producte amd id "+id+" al magatzem, capacitat "+ capacitat);
                 entregues.addProducte(producte);
                 removedProducte = producte;
                 break;
@@ -35,19 +36,8 @@ public class PR450Magatzem {
 
         if (removedProducte != null) {
             productes.remove(removedProducte);
-            pcs.firePropertyChange("magatzemRemove", removedProducte, null);
-            pcs.firePropertyChange("magatzemEntrega", removedProducte, null);
         }
     }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(listener);
-    }
-
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Magatzem:[");

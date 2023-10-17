@@ -1,15 +1,13 @@
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public class PR450Producte {
     private int id;
     private String nom;
-    private PropertyChangeSupport pcs;
+
 
     public PR450Producte(int id, String nom) {
         this.id = id;
         this.nom = nom;
-        pcs = new PropertyChangeSupport(this);
+        
     }
 
     public int getId() {
@@ -20,7 +18,7 @@ public class PR450Producte {
         int oldId = this.id;
         this.id = id;
         System.out.println("El Producte ha camviat l'id de "+oldId+" a "+id);
-        pcs.firePropertyChange("producteId", oldId, id);
+        
     }
 
     public String getNom() {
@@ -31,14 +29,6 @@ public class PR450Producte {
         String oldNom = this.nom;
         this.nom = nom;
         System.out.println("El Producte ha camviat el nom de "+oldNom+" a "+nom);
-        pcs.firePropertyChange("producteName", oldNom, nom);
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(listener);
+       
     }
 }
