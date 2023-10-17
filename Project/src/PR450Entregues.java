@@ -37,6 +37,7 @@ public class PR450Entregues {
         for (PR450Producte producte : productes) {
             result.append(producte.getId()).append(" : ").append(producte.getNom()).append(",");
         }
+        result.delete(result.length()-1, result.length());
         result.append("]");
         return result.toString();
     }

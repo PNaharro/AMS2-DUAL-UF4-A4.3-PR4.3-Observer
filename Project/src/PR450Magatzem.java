@@ -44,6 +44,7 @@ public class PR450Magatzem {
         for (PR450Producte producte : productes) {
             result.append(producte.getId()).append(" : ").append(producte.getNom()).append(","); 
         }
+        result.delete(result.length()-1, result.length());
         result.append("]");
         return result.toString();
     }
