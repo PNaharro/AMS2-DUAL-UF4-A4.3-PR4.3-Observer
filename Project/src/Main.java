@@ -11,8 +11,6 @@ public class Main {
         PR450Magatzem magatzem = new PR450Magatzem();
         PR450Entregues entregues = new PR450Entregues();
 
-        // Afegir PropertyChangeListeners als objectes necessaris aquí
-
         p0.setId(5);
         p0.setNom("Llibreta");
         p1.setNom("Boli");
